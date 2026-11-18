@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parametric Slat Wall · Off Axis Lab</title>
+<meta name="description" content="A Blender plugin that keeps a slat wall design and its cut files as the same object. In development.">
+<link rel="canonical" href="https://offaxislab.com/parametric-slat-wall.html">
+<meta property="og:title" content="Parametric Slat Wall · Off Axis Lab">
+<meta property="og:description" content="A Blender plugin that keeps a slat wall design and its cut files as the same object. In development.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://offaxislab.com/parametric-slat-wall.html">
+<meta property="og:image" content="https://offaxislab.com/assets/corner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+.oalw a{color:#f4f1ea}
+.oalw a:focus-visible{outline:2px solid #f4f1ea;outline-offset:4px}
+.oalw .btn{transition:transform 300ms cubic-bezier(0.22,1,0.36,1),opacity 300ms cubic-bezier(0.22,1,0.36,1)}
+.oalw .btn:active{transform:scale(0.98)}
+.oalw .zoom{transition:transform 500ms cubic-bezier(0.22,1,0.36,1)}
+@media (hover:hover) and (pointer:fine){
+.oalw .btn:hover{opacity:0.86}
+.oalw .card:hover .zoom{transform:scale(1.03)}
+.oalw .navlink:hover{color:#ffffff}
+}
+@keyframes oalw-lit{from{opacity:0.28}to{opacity:1}}
+@keyframes oalw-rise{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@supports (animation-timeline: view()){
+@media (prefers-reduced-motion: no-preference){
+.oalw .w{animation:oalw-lit linear both;animation-timeline:view();animation-range:cover calc(14% + var(--i) * 1.3%) cover calc(22% + var(--i) * 1.3%)}
+.oalw .rv{animation:oalw-rise cubic-bezier(0.22,1,0.36,1) both;animation-timeline:view();animation-range:entry 0% entry 70%}
+}
+}
+</style>
+<style>
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+img,video{max-width:100%}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:10;background:#f4f1ea;color:#131209;padding:12px 16px;border-radius:8px}
+@media (max-width: 720px){
+  .navlink{display:none}
+  section,footer{padding-left:20px !important;padding-right:20px !important}
+  #top{padding-left:0 !important;padding-right:0 !important;height:720px !important}
+  #top > div:last-child{padding-left:20px !important;padding-right:20px !important;padding-bottom:40px !important}
+  .rv[style*="padding: 64px 48px"]{padding:40px 24px !important}
+  .rv[style*="padding: 48px"]{padding:32px 24px !important}
+  img[style*="height: 520px"],img[style*="height: 560px"],img[style*="height: 480px"]{height:360px !important}
+  div[style*="grid-template-columns: 1.4fr 1fr"]{grid-template-columns:1fr !important}
+}
+</style>
+</head>
+<body style="background-color: #131209">
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="oalw" style="background-color: #131209; color: #f4f1ea; font-family: 'Geist', system-ui, sans-serif; font-size: 16px; line-height: 24px">
+<section id="top" style="position: relative; height: 820px; overflow: hidden">
+<img src="assets/wall_reception.jpg" alt="A hotel reception with a wall of wooden slats carved into diagonal waves" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+<div aria-hidden="true" style="position: absolute; inset: 0; background-color: rgba(19,18,9,0.3)"></div>
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 480px; background-image: linear-gradient(180deg, rgba(19,18,9,0) 0%, #131209 92%)"></div>
+<header style="position: absolute; top: 24px; left: 0; right: 0; display: flex; justify-content: center; padding: 0 16px">
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 24px; padding: 8px 8px 8px 24px; border-radius: 9999px; background-color: rgba(24,24,24,0.72); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(244,241,234,0.14)">
+<a href="index.html" style="display: inline-flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 600; text-decoration: none; padding: 8px 0"><svg aria-hidden="true" viewBox="0 0 1226 1206" style="height: 32px; width: auto; display: block"><path fill="#f4f1ea" fill-rule="evenodd" d="M470.0,1164.2C457.8,1156.9 435.7,1138.3 423.9,1125.4C404.8,1104.5 387.4,1075.7 379.6,1052.0C364.9,1007.4 367.0,974.7 386.9,935.5L393.5,922.5L393.4,909.5C393.3,898.4 392.8,893.9 389.5,879.0C384.3,854.9 384.0,849.0 387.4,839.6C389.7,833.5 391.2,831.2 395.9,826.6C402.2,820.7 405.1,819.4 410.3,820.4C421.6,822.7 423.2,822.5 439.2,817.0C463.1,808.8 469.2,808.9 503.5,818.6C538.6,828.5 569.0,848.3 585.0,872.0C588.5,877.1 601.0,899.5 601.0,900.6C601.0,902.4 606.4,909.0 607.9,909.0C610.4,909.0 625.1,893.4 634.6,880.7C644.6,867.3 645.0,867.0 651.9,867.0C661.9,867.0 681.0,861.5 693.9,855.0C700.8,851.6 708.6,846.6 729.0,832.6C748.1,819.5 755.8,811.5 764.3,796.6C772.2,782.8 775.2,772.1 776.6,752.7C777.1,745.2 777.5,743.7 779.3,742.5C781.3,741.3 793.6,738.9 816.0,735.5C827.9,733.6 828.0,733.7 828.0,749.9C828.1,756.8 828.5,764.5 829.0,767.0C831.2,777.1 834.0,812.3 834.0,828.5C834.0,859.4 832.6,865.9 822.2,885.1C806.6,913.8 779.8,943.4 741.0,974.8C719.4,992.2 701.1,1004.7 673.0,1020.9C668.9,1023.3 663.0,1026.7 660.0,1028.5C652.6,1032.8 588.6,1062.4 574.6,1068.0C522.2,1088.8 488.4,1120.5 482.0,1155.0C479.5,1168.2 478.2,1169.2 470.0,1164.2Z M524.2,947.9C531.7,946.3 540.4,941.6 543.5,937.5C549.2,930.1 551.6,915.7 548.6,907.2C545.0,897.1 533.4,883.7 522.7,877.2C516.9,873.7 511.9,872.4 484.1,867.0C457.4,861.9 444.2,856.5 436.3,847.5C430.6,841.0 428.6,841.0 426.9,847.4C424.9,854.8 422.4,857.7 412.5,863.5C399.9,870.9 399.0,873.8 404.2,889.0C407.0,897.2 414.2,934.6 413.8,939.0C413.5,942.6 414.1,944.0 416.0,944.0C418.4,944.0 423.6,934.2 426.9,923.7C429.2,916.1 429.0,915.2 424.1,911.8C416.9,906.9 414.4,900.5 418.2,896.7C420.6,894.3 421.5,894.2 437.1,893.5C463.0,892.4 487.6,893.1 489.6,895.1C492.3,897.8 489.8,900.5 479.6,906.0C474.4,908.8 469.9,911.8 469.5,912.7C468.3,916.1 475.1,927.1 484.0,936.1C491.2,943.4 493.4,945.0 498.5,946.8C505.4,949.1 516.1,949.6 524.2,947.9Z M372.2,802.5C367.5,800.4 357.5,789.9 356.0,785.5C354.2,780.1 355.1,776.0 361.3,760.4C369.6,739.4 371.5,733.1 370.3,731.1C369.1,729.2 364.7,728.7 333.5,727.1C279.5,724.3 239.3,720.1 206.0,714.0C203.0,713.5 195.3,712.1 189.0,710.9C139.4,702.0 91.8,684.5 66.5,665.9C54.2,656.8 42.9,642.3 40.9,632.8C34.4,602.6 58.3,574.7 114.5,546.9C141.4,533.6 196.9,513.3 226.5,506.0C228.2,505.6 234.2,503.9 240.0,502.2C258.3,496.8 295.4,488.0 297.2,488.6C299.1,489.2 299.6,491.5 298.0,492.5C297.5,492.8 288.1,495.6 277.3,498.6C253.5,505.2 229.8,512.6 213.5,518.5C206.9,520.9 200.4,523.1 199.0,523.5C193.9,525.0 166.2,537.4 156.0,542.7C127.2,557.7 104.6,575.5 96.5,589.4C92.6,596.2 89.8,606.0 90.2,611.1C91.2,620.8 102.4,636.2 113.6,643.3C135.2,656.8 160.2,666.2 194.0,673.5C198.1,674.4 203.3,675.5 205.5,676.0C212.2,677.6 240.9,682.8 252.0,684.4C292.1,690.4 376.4,696.1 383.5,693.4C385.4,692.6 386.3,690.6 389.5,679.5C393.7,664.9 394.1,667.4 383.5,646.4C378.3,636.0 373.5,627.0 373.0,626.4C372.5,625.7 368.4,625.2 362.3,625.2C351.6,625.2 343.1,622.7 334.0,617.2C327.5,613.2 327.6,611.8 336.0,586.8C344.6,561.1 345.6,556.7 347.0,537.5C350.4,490.2 357.7,461.8 372.2,438.7C377.2,430.7 377.4,430.2 378.1,420.8C379.7,400.5 384.6,383.1 395.1,360.7C401.8,346.4 411.1,329.9 416.9,322.0C423.8,312.6 435.2,299.1 439.1,295.6C441.5,293.5 446.9,288.5 451.0,284.6C460.5,275.7 486.6,257.4 503.2,248.1C539.5,227.8 576.6,215.5 622.2,208.5C646.1,204.8 653.9,206.8 636.5,212.1C610.8,219.8 573.5,239.4 553.2,255.7C549.7,258.6 547.7,262.0 549.5,262.0C550.0,262.0 570.1,254.3 575.8,252.0C583.1,248.9 622.5,237.7 636.0,234.8C661.6,229.4 673.7,227.6 699.0,225.5C724.3,223.5 748.3,223.6 777.2,226.0C807.0,228.5 811.0,229.1 828.4,234.1C837.6,236.8 842.6,237.8 843.3,237.1C843.9,236.5 841.7,232.4 836.7,224.8C832.6,218.6 825.7,207.9 821.4,201.0C817.2,194.1 813.0,188.0 812.1,187.3C810.0,185.7 802.7,185.7 794.3,187.4C780.9,190.1 767.0,191.4 765.8,190.2C764.0,188.4 763.6,176.6 765.0,168.6C768.4,149.3 781.8,133.8 804.2,123.3C808.5,121.3 811.9,119.1 811.7,118.6C811.1,117.1 799.1,117.5 790.0,119.4C774.7,122.5 755.1,134.8 745.3,147.4C737.6,157.2 737.1,157.6 736.0,156.0C733.3,151.9 735.7,132.5 740.9,117.5C753.3,81.7 786.0,54.4 829.5,43.4C839.5,40.9 842.2,40.7 859.0,40.6C901.3,40.5 936.8,54.3 965.7,82.3C977.6,93.9 989.0,110.0 989.0,115.5C989.0,118.1 987.7,117.2 980.5,109.9C958.3,87.4 928.0,74.5 895.9,73.7C881.0,73.4 881.3,75.6 897.0,80.9C938.4,95.1 962.9,121.7 970.1,160.3C972.9,175.7 969.5,197.2 961.9,211.6C956.9,221.2 959.1,222.8 967.5,215.9C984.2,202.1 994.0,182.9 994.0,164.0C994.0,159.4 994.3,158.0 995.5,158.0C1001.5,158.0 1001.4,182.0 995.2,200.2C989.8,215.9 982.9,225.5 968.2,237.1C956.7,246.3 950.3,250.0 938.1,254.2L928.5,257.5L906.6,257.5C892.9,257.5 884.5,257.9 884.3,258.5C884.2,259.1 888.1,263.5 893.1,268.4C907.7,282.7 916.9,298.5 924.0,321.1C929.4,338.3 929.8,339.2 931.3,338.8C933.9,337.9 935.3,332.4 935.8,321.3C936.2,310.9 936.4,310.0 938.2,310.0C940.6,310.0 953.1,321.9 960.3,331.0C963.2,334.6 972.0,345.4 979.8,355.0C987.7,364.6 995.5,374.8 997.1,377.5C1002.9,387.5 999.6,389.0 991.1,380.2L985.6,374.5L985.2,377.6C985.0,379.3 985.6,383.8 986.5,387.6C998.0,436.9 999.2,481.4 990.4,529.5C987.7,544.5 981.9,565.8 978.6,573.3L976.3,578.5L963.9,582.2C939.1,589.7 931.1,591.3 928.4,589.5C927.1,588.7 926.0,587.5 926.0,587.0C926.0,585.2 919.8,579.0 918.1,579.0C917.1,579.0 915.5,578.1 914.5,577.0C912.3,574.6 912.8,572.0 922.0,542.5C932.4,508.5 935.0,496.7 935.0,482.6C934.9,466.9 931.2,446.5 927.6,442.4C924.9,439.2 923.6,439.8 918.0,446.6C906.0,461.1 883.0,472.9 851.1,481.0C843.9,482.8 842.5,482.9 841.3,481.7C840.1,480.6 840.5,479.5 844.2,474.7C857.3,457.4 863.3,444.0 867.6,423.0C871.8,402.0 866.5,359.0 859.6,359.0C858.8,359.0 855.1,360.9 851.4,363.2C830.8,375.7 793.4,390.2 766.5,396.0C747.3,400.2 707.8,406.2 705.5,405.4C702.9,404.3 703.8,403.0 715.0,392.3C735.8,372.4 754.7,345.1 761.5,325.1C763.9,318.0 763.9,315.6 761.6,314.7C758.1,313.3 717.6,318.2 683.5,324.1C650.6,329.8 605.7,343.8 573.2,358.6C570.3,359.9 567.7,361.0 567.5,361.0C565.1,361.0 533.6,377.7 517.1,387.7C505.9,394.5 504.0,395.1 504.0,391.9C504.0,390.1 511.9,374.1 516.8,366.0C526.0,350.8 529.1,346.5 538.7,335.0C547.5,324.5 555.2,316.8 572.8,301.1C578.5,296.0 581.7,292.3 581.2,291.8C580.2,290.8 567.3,294.8 555.5,299.7C546.3,303.6 525.3,314.2 507.0,324.3C491.8,332.7 466.2,351.7 455.0,363.0C428.2,389.9 413.2,411.6 405.5,434.4C397.6,457.8 401.7,472.8 418.6,481.7C429.6,487.6 433.1,487.9 478.0,487.7C515.9,487.6 519.3,487.7 531.2,489.8C563.8,495.6 584.2,505.5 595.9,521.4C601.6,529.0 603.6,533.5 611.2,555.0C625.6,595.4 629.2,606.1 628.6,607.5C627.8,609.6 625.1,609.4 613.6,606.1C579.1,596.1 567.9,593.6 556.5,593.5C544.4,593.5 545.8,593.1 496.0,609.0C468.7,617.8 451.1,622.0 441.8,622.0C434.1,622.0 423.5,619.9 421.6,618.0C421.1,617.5 419.6,617.0 418.4,617.0C415.3,617.0 413.9,621.3 413.7,631.7C413.5,641.4 414.3,644.2 422.0,660.2C427.4,671.6 427.7,674.0 425.0,684.5C423.5,690.4 423.1,693.5 423.8,694.2C426.0,696.4 520.2,694.3 570.0,691.0C604.5,688.7 640.9,685.3 688.5,679.9C704.9,678.1 774.7,668.4 788.0,666.1C803.7,663.4 829.6,658.9 837.4,657.5C842.3,656.6 852.2,654.6 859.4,653.0C866.6,651.5 878.4,649.0 885.5,647.6C900.7,644.5 900.3,644.6 927.0,637.9C968.7,627.5 994.5,619.8 1017.8,610.8C1026.4,607.5 1036.4,603.7 1040.0,602.3C1079.9,587.1 1112.6,566.0 1127.3,546.1C1146.1,520.6 1131.7,495.2 1085.8,473.2C1079.1,470.0 1057.1,462.2 1041.2,457.4C1038.8,456.7 1037.5,452.1 1039.1,450.4C1040.5,449.1 1041.6,449.1 1049.1,450.4C1083.9,456.5 1122.9,469.5 1148.7,483.6C1162.1,490.9 1177.4,505.3 1183.0,516.0C1186.3,522.2 1186.5,522.9 1186.5,533.1C1186.5,543.5 1186.4,543.9 1182.7,551.0C1158.8,596.7 1063.6,642.4 926.5,674.0C914.4,676.8 899.7,680.2 893.8,681.5C887.8,682.9 878.2,685.1 872.2,686.5C861.5,689.0 852.6,690.7 824.5,695.5C816.2,696.9 807.5,698.5 805.0,699.1C802.5,699.6 796.0,700.7 790.5,701.6C785.0,702.4 776.2,703.7 771.0,704.6C765.8,705.4 756.3,706.7 750.0,707.5C743.7,708.3 737.6,709.2 736.5,709.5C731.2,710.6 711.5,713.2 693.0,715.0C681.7,716.2 664.0,718.0 653.7,719.0C588.5,725.6 508.2,730.0 451.4,730.0C412.3,730.0 415.1,729.1 412.0,742.1C409.5,752.8 409.5,753.7 411.9,755.0C414.4,756.3 425.6,756.3 435.8,754.9C448.0,753.3 453.8,754.8 460.5,761.3C469.3,769.9 470.1,778.1 463.0,785.9C459.9,789.2 459.8,789.3 453.7,788.6C436.9,786.8 435.2,786.8 428.2,788.4C419.9,790.3 411.7,793.3 401.0,798.3C388.3,804.2 379.2,805.5 372.2,802.5Z M860.5,769.0C859.5,767.3 860.7,766.4 866.8,764.2C880.9,759.0 897.7,742.4 906.6,724.7C909.2,719.7 913.9,716.0 917.8,716.0C921.8,716.0 921.3,718.7 914.8,730.2C904.8,748.1 889.4,762.5 873.5,768.7C869.8,770.1 861.3,770.3 860.5,769.0Z M847.9,608.4C846.1,606.2 851.6,595.6 857.8,589.5C866.5,581.1 882.1,575.1 892.2,576.3C904.8,577.8 918.1,588.2 914.9,594.2C913.5,596.7 906.0,596.6 898.4,593.9C894.5,592.5 890.0,591.8 885.0,591.7C876.0,591.7 873.6,592.7 860.1,602.9C849.8,610.7 849.8,610.7 847.9,608.4Z"></path></svg>Off Axis Lab</a>
+<a class="navlink" href="index.html#tools" aria-current="page" style="font-size: 14px; font-weight: 500; color: #ffffff; text-decoration: none; padding: 12px 0">Tools</a>
+<a class="navlink" href="index.html#tutorials" style="font-size: 14px; font-weight: 500; color: #cfcbc1; text-decoration: none; padding: 12px 0">Tutorials</a>
+<a class="navlink" href="index.html#about" style="font-size: 14px; font-weight: 500; color: #cfcbc1; text-decoration: none; padding: 12px 0">About</a>
+<a class="btn" href="https://www.youtube.com/@offaxislab" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 16px; border-radius: 9999px; background-color: #f4f1ea; color: #131209">YouTube</a>
+</nav>
+</header>
+
+<div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 0 48px 64px; display: flex; flex-direction: column; gap: 24px">
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #dedad0">Blender plugin · v1.10.9</div>
+<h1 style="margin: 0; max-width: 1000px; font-size: clamp(48px, 6.4vw, 96px); line-height: 1; font-weight: 600; letter-spacing: -0.03em; text-wrap: balance">A wall you shape,<br>and the cut files<br>that follow.</h1>
+<p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 28px; color: #dedad0; text-wrap: pretty">Parametric Slat Wall keeps the design and its cut sheets as the same object. Change the wall and the sheets change with it.</p>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px"><span style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 9999px; border: 1px solid rgba(244,241,234,0.5); font-weight: 600"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 9999px; background-color: #a8a49a"></span>In development</span><a href="mailto:contact@offaxislab.com" style="font-weight: 600; padding: 12px 0">Ask about it by email</a></div>
+</div>
+</section>
+<section aria-label="The idea" style="padding: 96px 48px">
+<p style="margin: 0 auto; max-width: 1040px; font-size: clamp(30px, 4.2vw, 60px); line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">
+<span class="w" style="--i:0">Design</span> <span class="w" style="--i:1">it</span> <span class="w" style="--i:2">once.</span> <span class="w" style="--i:3">The</span> <span class="w" style="--i:4">workshop</span> <span class="w" style="--i:5">gets</span> <span class="w" style="--i:6">exactly</span> <span class="w" style="--i:7">what</span> <span class="w" style="--i:8">you</span> <span class="w" style="--i:9">drew.</span>
+</p>
+</section>
+<section id="relief" style="padding: 0 48px 96px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 48px">
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">Four ways to give it a relief</h2>
+<p style="margin: 0; max-width: 400px; color: #a8a49a; text-wrap: pretty">The depth of every board comes from an image. How you make that image is up to you.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px 16px">
+<div class="card rv" style="flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_looks.jpg" alt="Twelve small slat walls, each with a different wave pattern, labelled Swell, Tide, S Curve, Drift, Twist, Stream, Sweep, Cascade, Drape, Fold, Ridge and Crest" style="display: block; width: 100%; height: 440px; object-fit: contain"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">01</div><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">Twelve looks, one click each</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">Each look is a heightmap shipped with the plugin, so the pattern holds at any board spacing.</p></div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px 16px; margin-top: 48px">
+<div class="card rv" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_paint.jpg" alt="A slat wall with a smooth hand painted swirl rising out of its surface" style="display: block; width: 100%; height: 560px; object-fit: cover"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">02</div><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">Paint the depth by hand</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">The plugin builds a canvas in front of the wall. White lifts a board, black leaves it flat.</p></div>
+</div>
+<div class="card rv" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_drawing.jpg" alt="A slat wall carved into concentric rings" style="display: block; width: 100%; height: 560px; object-fit: cover"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">03</div><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">Turn a drawing into a wall</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">Direct mode reads brightness as depth. Right for a logo, a pattern or anything you can paint in white.</p></div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px 16px; margin-top: 48px">
+<div class="card rv" style="flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_portrait.jpg" alt="Four steps side by side: a portrait, its depth map, the slat wall showing the face at an angle, and the same wall seen square on" style="display: block; width: 100%; height: 440px; object-fit: contain"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">04</div><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">Turn a portrait into a wall</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">Any image goes to ComfyUI on the same machine, comes back as a depth map and plugs into the wall.</p></div>
+</div>
+</div>
+</section>
+<section id="shape" style="padding: 0 48px 96px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 48px">
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">It bends, and it slices</h2>
+
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px 16px">
+<div class="card rv" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_floor.jpg" alt="A slat wall standing on an S shaped curve" style="display: block; width: 100%; height: 520px; object-fit: cover"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">A wall that follows the floor</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">Add a path curve and each board moves to stand on it. The boards do not change, so the cut files stay the same parts.</p></div>
+</div>
+<div class="card rv" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="overflow: hidden; border-radius: 16px; background-color: #0e0f13"><img class="zoom" src="assets/wall_leaf.jpg" alt="A leaf made of parallel boards, seen from the front, at an angle and from the side" style="display: block; width: 100%; height: 520px; object-fit: cover"></div>
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 560px"><h3 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 600; text-wrap: balance">Slice any object into boards</h3><p style="margin: 0; color: #cfcbc1; text-wrap: pretty">A second generator takes a mesh instead of an image. This leaf is 57 boards on an 18 mm pitch.</p></div>
+</div>
+</div>
+</section>
+<section id="output" style="padding: 0 48px 96px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 48px">
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">What comes out</h2>
+<p style="margin: 0; max-width: 400px; color: #a8a49a; text-wrap: pretty">One button. The sheets are sliced out of the same mesh you are looking at.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px">
+<div class="rv" style="flex: 1 1 360px; min-width: 0; overflow: hidden; border-radius: 16px; background-color: #f4f1ea"><img src="assets/wall_sheet.jpg" alt="A cutting sheet with curved board outlines nested on a panel" style="display: block; width: 100%; height: 480px; object-fit: contain"></div>
+<div class="rv" style="flex: 1.2 1 400px; min-width: 0"><dl style="margin: 0; display: grid; grid-template-columns: minmax(96px, 160px) minmax(0, 1fr); border-top: 1px solid #313131"><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">SVG</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">One file per sheet, with separate cut and engrave layers.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">DXF</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">The same geometry as polylines, for machines that will not read SVG.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">CSV</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">A cut list with sheet, part, width and height in millimetres.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Numbering</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">Every part is engraved with its real position in the wall.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Kerf</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">0.2 mm compensation in every slot.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Checks</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">The export refuses a wall that cannot be assembled, and names the piece.</dd></dl></div>
+</div>
+</section>
+<section id="rooms" style="padding: 0 48px 96px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 48px">
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">Where it could go</h2>
+
+</div>
+<div class="rv" style="overflow: hidden; border-radius: 16px"><img src="assets/wall_rooms.jpg" alt="Four interiors with slat walls: a leaf in a spa lounge, a ring in a living room, concentric rings in a boutique and a wave wall in an office lobby" style="display: block; width: 100%; height: auto"></div>
+<p style="margin: 24px 0 0; font-size: 12px; line-height: 16px; color: #a8a49a">The rooms are generated around the plugin's own renders. The walls are the real models.</p>
+</section>
+<section id="status" style="padding: 0 48px 96px">
+<div class="rv" style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 48px; padding: 64px 48px; border-radius: 24px; background-color: #1f1f1f">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">Where it stands</h2>
+<p style="margin: 0; color: #cfcbc1; text-wrap: pretty; max-width: 480px">The plugin works from the first wall to the exported sheets. It is not for sale yet, and the files still have to be proven on a real machine.</p>
+</div>
+<div style="flex: 1 1 360px; min-width: 0"><dl style="margin: 0; display: grid; grid-template-columns: minmax(96px, 160px) minmax(0, 1fr); border-top: 1px solid #313131"><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Blender</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">4.5 and later, with a legacy build for 4.0 to 4.4.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Mounting</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">Rails, comb, back plate or rods, picked for you.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Status</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0">In development.</dd><dt style="padding: 16px 0; border-bottom: 1px solid #313131; font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 24px; color: #a8a49a">Contact</dt><dd style="margin: 0; padding: 16px 0; border-bottom: 1px solid #313131; color: #dedad0"><a href="mailto:contact@offaxislab.com">contact@offaxislab.com</a></dd></dl></div>
+</div>
+</section>
+<footer style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding: 32px 48px 48px; border-top: 1px solid #313131; font-size: 14px; line-height: 20px; color: #a8a49a">
+<span>© 2026 Off Axis Lab</span>
+<span>Parametric Slat Wall</span>
+<a href="mailto:contact@offaxislab.com" style="padding: 12px 0">contact@offaxislab.com</a>
+</footer>
+
+</div>
+</main>
+</body>
+</html>
