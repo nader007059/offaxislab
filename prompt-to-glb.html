@@ -64,6 +64,8 @@ img,video{max-width:100%}
 .oalp .txt{display:flex;flex-direction:column;gap:8px;max-width:640px;margin-top:24px}
 .oalp .txt h3{margin:0;font-size:24px;line-height:32px;font-weight:600;text-wrap:balance}
 .oalp .txt p{margin:0;color:#cfcbc1;text-wrap:pretty}
+.oalp .caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
+.oalp .caps.four{grid-template-columns:repeat(4,minmax(0,1fr))}
 .oalp .stack{margin:0;display:grid;grid-template-columns:minmax(96px,160px) minmax(0,1fr);border-top:1px solid #313131}
 .oalp .stack dt{padding:16px 0;border-bottom:1px solid #313131;font-family:'Geist Mono',monospace;font-size:12px;line-height:24px;color:#a8a49a}
 .oalp .stack dd{margin:0;padding:16px 0;border-bottom:1px solid #313131;color:#dedad0}
@@ -91,7 +93,7 @@ img,video{max-width:100%}
 <div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #dedad0">Workflow · v2 · one full run</div>
 <h1 style="margin: 0; max-width: 1000px; font-size: clamp(48px, 6.4vw, 96px); line-height: 1; font-weight: 600; letter-spacing: -0.03em; text-wrap: balance">From one theme<br>to a finished scene.</h1>
 <p style="margin: 0; max-width: 600px; font-size: 18px; line-height: 28px; color: #dedad0; text-wrap: pretty">A rusted 1950s gas station, built end to end with ComfyUI, Pixal3D and Blender, and driven by Claude through MCP. Every image below comes from that single run.</p>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px"><a class="btn" href="#steps" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 9999px; font-weight: 600; text-decoration: none; background-color: #ff5b2e; color: #131209">Read the ten steps</a><a href="#stack" style="font-weight: 600; padding: 12px 0">See the tools</a></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px"><a class="btn" href="#steps" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 9999px; font-weight: 600; text-decoration: none; background-color: #ff5b2e; color: #131209">Read the twelve steps</a><a href="#stack" style="font-weight: 600; padding: 12px 0">See the tools</a></div>
 </div>
 </section>
 
@@ -103,7 +105,7 @@ img,video{max-width:100%}
 
 <section id="steps" style="padding: 0 48px 96px">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 48px; margin-bottom: 48px">
-<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">Ten steps, one conversation</h2>
+<h2 style="margin: 0; max-width: 680px; font-size: clamp(36px, 4vw, 48px); line-height: 1; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">Twelve steps, one conversation</h2>
 <p style="margin: 0; max-width: 420px; color: #a8a49a; text-wrap: pretty">You make the choices. Claude runs ComfyUI and Blender between them.</p>
 </div>
 
@@ -136,37 +138,49 @@ img,video{max-width:100%}
 </div>
 
 <div class="step rv">
-<div class="two">
-<figure class="shot"><img class="zoom" src="assets/gs_pixal3d.jpg" width="1120" height="880" loading="lazy" alt="The 3D gas pump from Pixal3D seen from the front and from the back"><figcaption>Pixal3D mesh, front and back</figcaption></figure>
-<figure class="shot"><img class="zoom" src="assets/gs_highlow.jpg" width="1120" height="880" loading="lazy" alt="The high poly pump next to its low poly version, looking the same"><figcaption>High poly left, low poly right</figcaption></figure>
+<figure class="shot"><img class="zoom" src="assets/gs_pixal3d.jpg" width="1120" height="880" loading="lazy" alt="The 3D gas pump from Pixal3D seen from the front and from the back" style="max-height: 640px; object-fit: contain"><figcaption>Pixal3D mesh, front and back</figcaption></figure>
+<div class="txt"><div class="lbl">05 · Pixal3D in ComfyUI</div><h3>Image to 3D</h3><p>Pixal3D builds a dense textured mesh from the four views, with a real back instead of a guessed one. It is detailed, but far too heavy for a game: about 700,000 triangles for one pump.</p></div>
 </div>
-<div class="txt"><div class="lbl">05 · Pixal3D in ComfyUI, then Blender</div><h3>Image to 3D, then a clean low poly</h3><p>Pixal3D builds a dense mesh from the four views, with a real back instead of a guessed one. In Blender, Quad Remesher rebuilds the topology at 12,000 to 37,000 faces and the color, roughness, metal and normal maps are baked from the dense version, so the light one looks the same.</p></div>
+
+<div class="step rv">
+<figure class="shot"><img class="zoom" src="assets/gs_pump_stages.jpg" width="1800" height="800" loading="lazy" alt="Three versions of the pump in Blender: the dense high poly mesh, the clean low poly quad mesh in wireframe, and the low poly with its baked textures"><figcaption class="caps"><span>High poly · 699,691 triangles</span><span>Low poly · 24,880 quads</span><span>Low poly · baked textures</span></figcaption></figure>
+<div class="txt"><div class="lbl">06 · Blender and Quad Remesher</div><h3>Retopology</h3><p>Quad Remesher rebuilds the pump as clean quads, 28 times lighter. The shape stays, the noise goes. The low poly on the right carries no extra geometry: its detail comes back from the bake.</p></div>
+</div>
+
+<div class="step rv">
+<figure class="shot"><img class="zoom" src="assets/gs_uv_maps.jpg" width="2400" height="594" loading="lazy" alt="The UV layout of the low poly pump next to its baked base color, ORM and normal maps"><figcaption class="caps four"><span>UV layout</span><span>Base color</span><span>ORM</span><span>Normal</span></figcaption></figure>
+<div class="txt"><div class="lbl">07 · Blender bake in Cycles</div><h3>UVs and baked maps</h3><p>The low poly is unwrapped, then the high poly is baked onto it: base color, an ORM map packing occlusion, roughness and metal, and a normal map that carries the small dents and bolts. Four 2K textures, ready for any engine.</p></div>
 </div>
 
 <div class="step rv">
 <figure class="shot"><img class="zoom" src="assets/gs_lineup.jpg" width="1800" height="1080" loading="lazy" alt="Thirteen low poly props rendered side by side: pumps, price sign, cars, soda machines, oil cans, tires, compressor and bench"></figure>
-<div class="txt"><div class="lbl">06 · Thirteen GLB files</div><h3>Every prop, game ready</h3><p>Thirteen props, each exported as its own GLB with 2K textures. When the four views drifted, as with the station wagon, one image gave the better mesh. The building came out sharper with TRELLIS.2.</p></div>
+<div class="txt"><div class="lbl">08 · Thirteen GLB files</div><h3>Every prop, game ready</h3><p>The same treatment for every prop: thirteen GLB files at 12,000 to 37,000 faces each. When the four views drifted, as with the station wagon, one image gave the better mesh. The building came out sharper with TRELLIS.2.</p></div>
+</div>
+
+<div class="step rv">
+<figure class="shot"><img class="zoom" src="assets/gs_aerial_clay.jpg" width="1920" height="1080" loading="lazy" alt="Clay render of the whole gas station set seen from above: the station, the props, the road and desert plants"><figcaption>The full set in clay, seen from above</figcaption></figure>
+<div class="two" style="margin-top: 16px">
+<figure class="shot"><img class="zoom" src="assets/gs_clay.jpg" width="2560" height="1080" loading="lazy" alt="Clay render of the scene from the final camera"><figcaption>Clay, final camera</figcaption></figure>
+<figure class="shot"><img class="zoom" src="assets/gs_wire.jpg" width="2560" height="1080" loading="lazy" alt="Wireframe render of the scene from the final camera showing the mesh of every prop"><figcaption>Wireframe, final camera</figcaption></figure>
+</div>
+<div class="txt"><div class="lbl">09 · Blender</div><h3>A real 3D set</h3><p>Every prop is a mesh in one Blender scene, scaled to real sizes and placed on a road through a desert dressed with BlendKit plants. The camera can go anywhere: this is a set, not a painting.</p></div>
 </div>
 
 <div class="step rv">
 <figure class="shot"><img class="zoom" src="assets/gs_light.jpg" width="1920" height="1080" loading="lazy" alt="The assembled gas station scene in Blender, lit by a pink sunset sky"></figure>
-<div class="txt"><div class="lbl">07 · Blender and Cycles</div><h3>Assemble and light</h3><p>The props are scaled to real sizes and placed on a road through a desert dressed with BlendKit plants. A sunset HDRI and ground haze set the mood. This is the scene before the wear pass.</p></div>
+<div class="txt"><div class="lbl">10 · Cycles</div><h3>Light and atmosphere</h3><p>A sunset HDRI and ground haze set the mood. This is the scene before the wear pass.</p></div>
 </div>
 
 <div class="step rv">
 <figure class="shot"><img class="zoom" src="assets/gs_decals.jpg" width="2248" height="892" loading="lazy" alt="Ten transparent decals: a faded Dustline sign, a round Dustline plaque, rust streaks, grime, an oil stain, cracks, alligator cracking, skid marks, blown sand and an asphalt patch"></figure>
 <figure class="shot" style="margin-top: 16px"><img class="zoom" src="assets/gs_decals_detail.jpg" width="1600" height="696" loading="lazy" alt="Close view of the station facade with the painted Dustline sign, the round plaque and rust streaks"></figure>
-<div class="txt"><div class="lbl">08 · Decals from ComfyUI</div><h3>Wear and story</h3><p>ComfyUI also paints the wear: a faded sign for Dustline, a made up brand, plus rust streaks, grime, oil stains, cracks, skid marks and blown sand. Each one is a transparent plane laid on the wall or wrapped onto the road.</p></div>
+<div class="txt"><div class="lbl">11 · Decals from ComfyUI</div><h3>Wear and story</h3><p>ComfyUI also paints the wear: a faded sign for Dustline, a made up brand, plus rust streaks, grime, oil stains, cracks, skid marks and blown sand. Each one is a transparent plane laid on the wall or wrapped onto the road.</p></div>
 </div>
 
 <div class="step rv">
 <figure class="shot"><img class="zoom" src="assets/gs_hero.jpg" width="2560" height="1080" loading="lazy" alt="The final render of the rusted gas station at sunset in an ultrawide frame"></figure>
-<div class="txt"><div class="lbl">09 · Final render</div><h3>One ultrawide frame</h3><p>Rendered in Cycles at 5120 × 2160, in the 21:9 ultrawide format. A wall lamp left on above the door is the only warm light in the station.</p></div>
-</div>
-
-<div class="step rv">
-<figure class="shot"><img class="zoom" src="assets/gs_letterbox.jpg" width="1920" height="1080" loading="lazy" alt="The same final render inside a 16:9 frame with black bars above and below, like a film"></figure>
-<div class="txt"><div class="lbl">10 · Delivery</div><h3>Ready for a film frame</h3><p>The same image sits in a 16:9 frame with black bars, ready for video. The scene itself stays a set of GLB files you can open in Unreal Engine, Unity or any viewer.</p></div>
+<figure class="shot" style="margin-top: 16px"><img class="zoom" src="assets/gs_letterbox.jpg" width="1920" height="1080" loading="lazy" alt="The same final render inside a 16:9 frame with black bars above and below, like a film"><figcaption>The same frame with cinema bars, ready for video</figcaption></figure>
+<div class="txt"><div class="lbl">12 · Final render</div><h3>One ultrawide frame</h3><p>Rendered in Cycles at 5120 × 2160, in the 21:9 ultrawide format. A wall lamp left on above the door is the only warm light in the station. The scene itself stays a set of GLB files you can open in Unreal Engine, Unity or any viewer.</p></div>
 </div>
 
 <div class="rv" style="margin-top: 96px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; padding: 48px; border-radius: 16px; background-color: #181818; border: 1px solid #313131">
