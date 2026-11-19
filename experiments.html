@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Experiments · Off Axis Lab</title>
-<meta name="description" content="Short tests from the lab: an LED wall that follows your hand, and a MetaHuman animated from a single video.">
+<meta name="description" content="Short tests from the lab: an LED wall that follows your hand, a kinetic LED wall concept, and a MetaHuman animated from a single video.">
 <link rel="canonical" href="https://offaxislab.com/experiments.html">
 <meta property="og:title" content="Experiments · Off Axis Lab">
-<meta property="og:description" content="Short tests from the lab: an LED wall that follows your hand, and a MetaHuman animated from a single video.">
+<meta property="og:description" content="Short tests from the lab: an LED wall that follows your hand, a kinetic LED wall concept, and a MetaHuman animated from a single video.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://offaxislab.com/experiments.html">
 <meta property="og:image" content="https://offaxislab.com/assets/exp_gesture.jpg">
@@ -87,9 +87,19 @@ img,video{max-width:100%}
 </div>
 </div>
 <div class="rv" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; padding: 0 0 96px">
+<div style="overflow: hidden; border-radius: 16px"><img src="assets/exp_kinetic.jpg" alt="A woman walks past a black kinetic LED wall in a showroom; the modules beside her slide out and glow warm white and pink" loading="lazy" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover"></div>
+<div style="display: flex; flex-direction: column; gap: 16px">
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">02 · Blender, LTX and Unreal Engine</div>
+<h2 style="margin: 0; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">A kinetic LED wall that follows people</h2>
+<p style="margin: 0; color: #cfcbc1; text-wrap: pretty">The next step after the hand test: modules that slide out and light up as someone walks past, then go dark behind them. The wall and its motion were built in Blender with Geometry Nodes, then turned into a realistic shot with LTX, an AI video model guided by the Blender render. A concept visualization, not real footage.</p>
+<ul style="margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 20px; color: #a8a49a"><li style="padding: 12px 0; border-top: 1px solid #313131">Wall: 48 × 12 modules on rods, 28 cm travel</li><li style="padding: 12px 0; border-top: 1px solid #313131">Motion: Geometry Nodes simulation in Blender</li><li style="padding: 12px 0; border-top: 1px solid #313131">Render: LTX video to video, guided by depth and the Blender pass</li></ul>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px"><a class="btn" href="https://youtu.be/_bqIS9toCM0" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 9999px; font-weight: 600; text-decoration: none; background-color: #ff5b2e; color: #131209">Watch the video</a><a href="https://youtube.com/shorts/z2CdJs4FKCY" style="font-weight: 600; padding: 12px 0">Vertical Short</a></div>
+</div>
+</div>
+<div class="rv" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; padding: 0 0 96px">
 <div style="overflow: hidden; border-radius: 16px"><img src="assets/exp_metahuman.jpg" alt="Left, a person in a photo studio raising a knee; right, a MetaHuman in Unreal Engine in the same pose" loading="lazy" style="display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover"></div>
 <div style="display: flex; flex-direction: column; gap: 16px">
-<div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">02 · Unreal Engine and MetaHuman</div>
+<div style="font-family: 'Geist Mono', monospace; font-size: 12px; line-height: 16px; color: #a8a49a">03 · Unreal Engine and MetaHuman</div>
 <h2 style="margin: 0; font-size: clamp(30px, 3.4vw, 40px); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance">One video in, a MetaHuman out</h2>
 <p style="margin: 0; color: #cfcbc1; text-wrap: pretty">A test of the MetaHuman Animator motion capture from a single video. No suit and no markers: the body motion from the clip lands on a MetaHuman in Unreal Engine. The person in the input video is generated with AI.</p>
 <ul style="margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 20px; color: #a8a49a"><li style="padding: 12px 0; border-top: 1px solid #313131">Input: one video, no mocap suit</li><li style="padding: 12px 0; border-top: 1px solid #313131">Solve: MetaHuman Animator in Unreal Engine</li><li style="padding: 12px 0; border-top: 1px solid #313131">Output: body animation on a MetaHuman</li></ul>
