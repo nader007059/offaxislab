@@ -50,7 +50,11 @@ img,video{max-width:100%}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:16px;top:16px;z-index:10;background:#f4f1ea;color:#131209;padding:12px 16px;border-radius:8px}
 @media (max-width: 720px){
-  .navlink{display:none}
+  nav[aria-label="Main"]{border-radius:24px !important;gap:0 24px !important;padding:8px 8px 4px 20px !important}
+  nav[aria-label="Main"] > .btn{order:1}
+  nav[aria-label="Main"]::after{content:"";order:2;flex-basis:100%;height:0}
+  .navlink{order:3;padding:12px 4px !important}
+  @media (max-width: 360px){nav[aria-label="Main"]{gap:0 12px !important;padding-left:14px !important}nav[aria-label="Main"] > .btn{padding:10px 14px !important}}
   section,footer{padding-left:20px !important;padding-right:20px !important}
   #top{padding-left:0 !important;padding-right:0 !important;height:720px !important}
   #top > div:last-child{padding-left:20px !important;padding-right:20px !important;padding-bottom:40px !important}
